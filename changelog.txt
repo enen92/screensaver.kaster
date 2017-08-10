@@ -1,2 +1,2 @@
-v1.0.0  11/2/2007
+v1.0.1  10/8/2017
 -First version of the addon
