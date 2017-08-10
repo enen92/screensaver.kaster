@@ -28,7 +28,7 @@ import kodiutils
 import screensaverutils
 
 PATH = xbmcaddon.Addon().getAddonInfo("path")
-IMAGE_FILE = os.path.join(PATH, "resources", "images", "images.v7.json")
+IMAGE_FILE = os.path.join(PATH, "resources", "images", "chromecast.json")
 
 
 class Kaster(xbmcgui.WindowXMLDialog):

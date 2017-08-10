@@ -11,9 +11,9 @@
 		<source>https://github.com/enen92/screensaver.kaster</source>
 		<forum>https://forum.kodi.tv/showthread.php?tid=319709</forum>
 		<summary lang="en_GB">A chromecast-like screensaver for Kodi</summary>
-        <summary lang="pt_PT">Um screensaver idêntico ao screensaver original chromecast</summary>
+		<summary lang="pt_PT">Um screensaver idêntico ao screensaver original chromecast</summary>
 		<description lang="en_GB">Display beautiful pictures originally from the chromecast screensaver. You can also display your own photos along with its respective information.</description>
-        <description lang="pt_PT">Apresenta imagens lindíssimas originalmente pertencentes ao screensaver do chromecast. Pode também apresentar as suas próprias imagens conjuntamente com a respectiva informação.</description>
+		<description lang="pt_PT">Apresenta imagens lindíssimas originalmente pertencentes ao screensaver do chromecast. Pode também apresentar as suas próprias imagens conjuntamente com a respectiva informação.</description>
 		<news>v1.0.0 [CR]
 			- First version of the addon [CR]
 		</news>
