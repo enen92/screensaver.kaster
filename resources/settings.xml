@@ -5,4 +5,13 @@
 		<setting label="32003" type="enum" id="screensaver-mode" default="0" lvalues="32004|32005|32006"/>
 		<setting label="32009" type="folder" id="my-pictures-folder" source="auto" option="writeable" visible="eq(-1,1)|eq(-1,2)"/>
 	</category>
+	<category label="32011">
+        <setting label="32012" type="bool" id="hide-kodi-logo" default="false"/>
+        <setting label="32013" type="bool" id="hide-weather-info" default="false"/>
+        <setting label="32014" type="bool" id="hide-clock-info" default="false"/>
+        <setting label="32015" type="bool" id="hide-pic-info" default="false"/>
+    </category>
+    <category label="32016">
+        <setting label="32017" type="enum" id="animation" lvalues="32018|32019"/>
+    </category>
 </settings>

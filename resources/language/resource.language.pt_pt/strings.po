@@ -59,3 +59,39 @@ msgstr "Pasta com as imagens"
 msgctxt "#32010"
 msgid "Failed to parse image dictionary"
 msgstr "Erro a fazer parse da imagem no dicionário"
+
+msgctxt "#32011"
+msgid "Label Information"
+msgstr "Informação de labels"
+
+msgctxt "#32012"
+msgid "Hide Kodi logo"
+msgstr "Esconder logo do Kodi"
+
+msgctxt "#32013"
+msgid "Hide weather info"
+msgstr "Esconder informação de metereologia"
+
+msgctxt "#32014"
+msgid "Hide clock info"
+msgstr "Esconder relógio"
+
+msgctxt "#32015"
+msgid "Hide picture info"
+msgstr "Esconder informação das fotografias"
+
+msgctxt "#32016"
+msgid "Animations"
+msgstr "Animações"
+
+msgctxt "#32017"
+msgid "Enabled animation"
+msgstr "Animação activa"
+
+msgctxt "#32018"
+msgid "Fade"
+msgstr "Fade"
+
+msgctxt "#32019"
+msgid "Pan and zoom"
+msgstr "Pan e zoom"

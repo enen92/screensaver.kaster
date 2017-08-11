@@ -60,7 +60,41 @@ msgctxt "#32010"
 msgid "Failed to parse image dictionary"
 msgstr ""
 
+msgctxt "#32011"
+msgid "Label Information"
+msgstr ""
 
+msgctxt "#32012"
+msgid "Hide Kodi logo"
+msgstr ""
+
+msgctxt "#32013"
+msgid "Hide weather info"
+msgstr ""
+
+msgctxt "#32014"
+msgid "Hide clock info"
+msgstr ""
+
+msgctxt "#32015"
+msgid "Hide picture info"
+msgstr ""
+
+msgctxt "#32016"
+msgid "Animations"
+msgstr ""
+
+msgctxt "#32017"
+msgid "Enabled animation"
+msgstr ""
+
+msgctxt "#32018"
+msgid "Fade"
+msgstr ""
+
+msgctxt "#32019"
+msgid "Pan and zoom"
+msgstr ""
 
 
 

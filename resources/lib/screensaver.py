@@ -43,6 +43,7 @@ class Kaster(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):
         self.images = []
+        self.set_property()
 
     def onInit(self):
         self.exit_monitor = self.ExitMonitor(self.exit)
@@ -91,7 +92,7 @@ class Kaster(xbmcgui.WindowXMLDialog):
                 # Insert photo
                 self.backgroud.setImage(self.images[rand_index]["url"])
                 # Pop image and wait
-                self.images.pop(rand_index)
+                del self.images[rand_index]
                 self.exit_monitor.waitForAbort(kodiutils.get_setting_as_int("wait-time-before-changing-image"))
                 # Check if images dict is empty, if so read the file again
                 self.get_images()
@@ -111,6 +112,19 @@ class Kaster(xbmcgui.WindowXMLDialog):
             else:
                 return self.get_images(override=True)
         shuffle(self.images)
+        return
+
+    def set_property(self):
+        if "estuary" in xbmc.getSkinDir():
+            self.setProperty("clockfont", "fontclock")
+        else:
+            self.setProperty("clockfont", "fontmainmenu")
+        # Set skin properties as settings
+        for setting in ["hide-clock-info", "hide-kodi-logo", "hide-weather-info", "hide-pic-info"]:
+            self.setProperty(setting, kodiutils.get_setting(setting))
+        # Set animations
+        if kodiutils.get_setting_as_int("animation") == 1:
+            self.setProperty("animation","panzoom")
         return
 
     def exit(self):
