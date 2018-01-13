@@ -33,12 +33,12 @@ def get_own_pictures(path):
     images_dict = {}
     image_file = os.path.join(xbmc.translatePath(path), "images.json")
     if xbmcvfs.exists(image_file):
-        with open(image_file, "r") as f:
-            try:
-                images_dict = json.loads(f.read())
-            except ValueError:
-                kodiutils.log(kodiutils.get_string(32010), xbmc.LOGERROR)
-    for _file in files:
+        f = xbmcvfs.File(image_file)
+        try:
+           images_dict = json.loads(f.read())
+        except ValueError:
+           kodiutils.log(kodiutils.get_string(32010), xbmc.LOGERROR)
+        f.close()    for _file in files:
         if _file.endswith(('.png', '.jpg', '.jpeg')):
             returned_dict = {
                 "url": os.path.join(xbmc.translatePath(path), _file),
