@@ -26,7 +26,7 @@ msgstr "Fotografía de"
 
 msgctxt "#32002"
 msgid "General"
-msgstr ""
+msgstr "General"
 
 msgctxt "#32003"
 msgid "Screensaver Mode"
