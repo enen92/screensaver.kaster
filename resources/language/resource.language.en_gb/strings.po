@@ -61,7 +61,7 @@ msgid "Failed to parse image dictionary"
 msgstr ""
 
 msgctxt "#32011"
-msgid "Label Information"
+msgid "Aspect"
 msgstr ""
 
 msgctxt "#32012"
@@ -100,6 +100,8 @@ msgctxt "#32020"
 msgid "Hide dim overlay"
 msgstr ""
 
-
+msgctxt "#32021"
+msgid "Show black background"
+msgstr ""
 
 
