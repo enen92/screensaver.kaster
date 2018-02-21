@@ -40,12 +40,8 @@ class ScreenSaverUtils:
     def __append_image(self, image):
         self.images.append(image)
 
-    def __get_images_in_path(self, path):
-        folders, files = xbmcvfs.listdir(xbmc.translatePath(path))
-        return folders, files
-
     def __get_images_recursively(self, path):
-        folders, files = self.__get_images_in_path(path)
+        folders, files = xbmcvfs.listdir(xbmc.translatePath(path))
         for _file in files:
             self.__append_image(os.path.join(xbmc.translatePath(path), _file))
         if folders:
