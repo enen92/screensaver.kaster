@@ -21,6 +21,7 @@
             <width>1920</width>
             <height>980</height>
             <texture>overlayfade.png</texture>
+            <visible>!String.IsEqual(Window.Property(hide-overlay),"true")</visible>
         </control>
         <control type="image">
             <description>kodi logo</description>

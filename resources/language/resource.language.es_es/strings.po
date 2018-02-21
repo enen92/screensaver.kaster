@@ -95,3 +95,7 @@ msgstr "Desvanecerse"
 msgctxt "#32019"
 msgid "Pan and zoom"
 msgstr "Panorámica y zoom"
+
+msgctxt "#32020"
+msgid "Hide dim overlay"
+msgstr "Ocultar plano dim"

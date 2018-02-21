@@ -120,7 +120,7 @@ class Kaster(xbmcgui.WindowXMLDialog):
         else:
             self.setProperty("clockfont", "fontmainmenu")
         # Set skin properties as settings
-        for setting in ["hide-clock-info", "hide-kodi-logo", "hide-weather-info", "hide-pic-info"]:
+        for setting in ["hide-clock-info", "hide-kodi-logo", "hide-weather-info", "hide-pic-info", "hide-overlay"]:
             self.setProperty(setting, kodiutils.get_setting(setting))
         # Set animations
         if kodiutils.get_setting_as_int("animation") == 1:

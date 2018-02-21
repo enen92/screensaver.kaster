@@ -96,6 +96,10 @@ msgctxt "#32019"
 msgid "Pan and zoom"
 msgstr ""
 
+msgctxt "#32020"
+msgid "Hide dim overlay"
+msgstr ""
+
 
 
 
