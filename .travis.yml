@@ -17,7 +17,7 @@ deploy:
       tags: true
   # Submit to the official Kodi repository
   - provider: script
-    script: submit-addon -r repo-plugin -b krypton --pull-request screensaver.kaster
+    script: submit-addon -r repo-scripts -b krypton --pull-request screensaver.kaster
     on:
       tags: true
 notifications:
