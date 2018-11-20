@@ -1,0 +1,22 @@
+language: python
+python: "2.7"
+before_deploy:
+  - pip install git+https://github.com/romanvm/kodi-addon-submitter.git
+  - python submit-addon -z screensaver.kaster # Create an installable ZIP
+  - export RELEASE_ZIP=$(ls *.zip)
+deploy:
+  # Publish an installable ZIP to GitHub Releases
+  - provider: releases
+    api_key: $GH_TOKEN
+    file_glob: true
+    file: $RELEASE_ZIP
+    skip_cleanup: true
+    on:
+      tags: true
+  # Submit to the official Kodi repo
+  - provider: script
+    script: submit-addon -r repo-plugin -b krypton --pull-request screensaver.kaster
+    on:
+      tags: true
+notifications:
+  email: false
