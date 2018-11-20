@@ -1,4 +1,6 @@
 language: python
+install: echo "Install test dependencies"
+script: echo "Run tests"
 python: "2.7"
 before_deploy:
   - pip install git+https://github.com/romanvm/kodi-addon-submitter.git
