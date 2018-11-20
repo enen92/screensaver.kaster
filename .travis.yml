@@ -3,9 +3,15 @@ install: echo "Install test dependencies"
 script: echo "Run tests"
 python: "3.6"
 before_deploy:
+  - pip install kodi-addon-checker
   - pip install git+https://github.com/romanvm/kodi-addon-submitter.git
   - submit-addon -z screensaver.kaster # Create an installable ZIP
   - export RELEASE_ZIP=$(ls *.zip)
+addon_check:
+  - provider: script
+  script: kodi-addon-checker --branch=krypton .
+  on:
+    tags: false
 deploy:
   # Publish an installable ZIP to GitHub Releases
   - provider: releases
@@ -21,4 +27,4 @@ deploy:
     on:
       tags: true
 notifications:
-  email: false
+  email: true
