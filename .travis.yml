@@ -1,8 +1,10 @@
 language: python
+install: echo "Install test dependencies"
+script: echo "Run tests"
 python: "2.7"
 before_deploy:
   - pip install git+https://github.com/romanvm/kodi-addon-submitter.git
-  - python submit-addon -z screensaver.kaster # Create an installable ZIP
+  - submit-addon -z screensaver.kaster # Create an installable ZIP
   - export RELEASE_ZIP=$(ls *.zip)
 deploy:
   # Publish an installable ZIP to GitHub Releases
