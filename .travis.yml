@@ -9,9 +9,9 @@ before_deploy:
   - export RELEASE_ZIP=$(ls *.zip)
 addon_check:
   - provider: script
-  script: kodi-addon-checker --branch=krypton .
-  on:
-    tags: false
+    script: kodi-addon-checker --branch=krypton .
+    on:
+      tags: false
 deploy:
   # Publish an installable ZIP to GitHub Releases
   - provider: releases
