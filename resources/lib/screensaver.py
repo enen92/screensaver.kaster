@@ -109,7 +109,7 @@ class Kaster(xbmcgui.WindowXMLDialog):
                 # note: abort requested is only called after kodi kills the entrypoint and we need to return
                 # as soon as possible
                 loop_count = (kodiutils.get_setting_as_int("wait-time-before-changing-image") * 1000) / 200
-                for _ in range(0, loop_count):
+                for _ in range(0, int(loop_count)):
                     if self._isactive and not self.exit_monitor.abortRequested():
                         xbmc.sleep(200)
                 # Check if images dict is empty, if so read the file again
