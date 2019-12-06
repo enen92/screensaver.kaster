@@ -77,14 +77,14 @@ class Kaster(xbmcgui.WindowXMLDialog):
                         continue
 
                     # photo metadata
-                    if "location" in self.images[rand_index].keys() and "photographer" in self.images[rand_index].keys():
+                    if "location" in list(self.images[rand_index].keys()) and "photographer" in list(self.images[rand_index].keys()):
                         self.metadata_line2.setLabel(self.images[rand_index]["location"])
                         self.metadata_line3.setLabel("%s %s" % (kodiutils.get_string(32001),
                                                                 self.utils.remove_unknown_author(self.images[rand_index]["photographer"])))
-                    elif "location" in self.images[rand_index].keys() and "photographer" not in self.images[rand_index].keys():
+                    elif "location" in list(self.images[rand_index].keys()) and "photographer" not in list(self.images[rand_index].keys()):
                         self.metadata_line2.setLabel(self.images[rand_index]["location"])
                         self.metadata_line3.setLabel("")
-                    elif "location" not in self.images[rand_index].keys() and "photographer" in self.images[rand_index].keys():
+                    elif "location" not in list(self.images[rand_index].keys()) and "photographer" in list(self.images[rand_index].keys()):
                         self.metadata_line2.setLabel("%s %s" % (kodiutils.get_string(32001),
                                                                 self.utils.remove_unknown_author(self.images[rand_index]["photographer"])))
                         self.metadata_line3.setLabel("")
