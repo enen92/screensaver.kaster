@@ -116,7 +116,7 @@ class Kaster(xbmcgui.WindowXMLDialog):
         # Read google images from json file
         self.images = []
         if kodiutils.get_setting_as_int("screensaver-mode") == 0 or kodiutils.get_setting_as_int("screensaver-mode") == 2 or override:
-            with open(IMAGE_FILE, "r") as f:
+            with open(IMAGE_FILE, "r", encoding="utf-8") as f:
                 images = f.read()
             self.images = json.loads(images)
         # Check if we have images to append
