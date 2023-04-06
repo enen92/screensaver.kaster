@@ -125,7 +125,7 @@ class Kaster(xbmcgui.WindowXMLDialog):
             self.images = json.loads(images)
         # Check if we have images to append
         if kodiutils.get_setting_as_int("screensaver-mode") == 1 or kodiutils.get_setting_as_int("screensaver-mode") == 2 and not override:
-            if kodiutils.get_setting("my-pictures-folder") and xbmcvfs.exists(xbmc.translatePath(kodiutils.get_setting("my-pictures-folder"))):
+            if kodiutils.get_setting("my-pictures-folder") and xbmcvfs.exists(xbmcvfs.translatePath(kodiutils.get_setting("my-pictures-folder"))):
                 for image in self.utils.get_own_pictures(kodiutils.get_setting("my-pictures-folder")):
                     self.images.append(image)
             else:
