@@ -31,9 +31,9 @@ class ScreenSaverUtils:
         self.images.append(image)
 
     def __get_images_recursively(self, path):
-        folders, files = xbmcvfs.listdir(xbmc.translatePath(path))
+        folders, files = xbmcvfs.listdir(xbmcvfs.translatePath(path))
         for _file in files:
-            self.__append_image(os.path.join(xbmc.translatePath(path), _file))
+            self.__append_image(os.path.join(xbmcvfs.translatePath(path), _file))
         if folders:
             for folder in folders:
                 path = os.path.join(path,folder)
@@ -46,7 +46,7 @@ class ScreenSaverUtils:
         self.__reset_images()
         images_dict = {}
 
-        image_file = os.path.join(xbmc.translatePath(path), "images.json")
+        image_file = os.path.join(xbmcvfs.translatePath(path), "images.json")
         if xbmcvfs.exists(image_file):
             f = xbmcvfs.File(image_file)
             try:
@@ -55,7 +55,7 @@ class ScreenSaverUtils:
                kodiutils.log(kodiutils.get_string(32010), xbmc.LOGERROR)
             f.close()
 
-        self.__get_images_recursively(xbmc.translatePath(path))
+        self.__get_images_recursively(xbmcvfs.translatePath(path))
 
         for _file in self.get_all_images():
             if _file.lower().endswith(('.png', '.jpg', '.jpeg')):
@@ -65,7 +65,7 @@ class ScreenSaverUtils:
                 }
                 if images_dict:
                     for image in images_dict:
-                        if "image" in list(image.keys()) and os.path.join(xbmc.translatePath(path),image["image"]) == _file:
+                        if "image" in list(image.keys()) and os.path.join(xbmcvfs.translatePath(path),image["image"]) == _file:
                             if "line1" in list(image.keys()):
                                 returned_dict["line1"] = image["line1"]
                             if "line2" in list(image.keys()):
