@@ -60,61 +60,75 @@ class Kaster(xbmcgui.WindowXMLDialog):
         # Grab images
         self.get_images()
 
+        # Image order is randomize. Displaying them one by one is already going to show them in random order
+        n_images = len(self.images)
+        current_image = 0 
+        wait_time = kodiutils.get_setting_as_int("wait-time-before-changing-image")
+
         # Start Image display loop
         if self.images and self.exit_monitor:
             while self._isactive and not self.exit_monitor.abortRequested():
-                rand_index = randint(0, len(self.images) - 1)
+
+                # Check if ran out of images, if so read the file again
+                if current_image >= n_images:
+                    self.get_images()
+                    n_images = len(self.images)
+                    current_image = 0
 
                 # if it is a google image....
-                if "private" not in self.images[rand_index]:
-                    req = requests.head(url=self.images[rand_index]["url"])
+                if "private" not in self.images[current_image]:
+                    req = requests.head(url=self.images[current_image]["url"])
                     if req.status_code != 200:
                         # sleep for a bit to avoid 429 (too many requests)
                         if req.status_code == 429:
                             self.exit_monitor.waitForAbort(5)
+                        # Also, skip the current image in case we're hitting an inexistent image, otherwise
+                        # we get stuck in a loop requesting this image over and over again
+                        current_image = current_image + 1
                         continue
 
                     # photo metadata
-                    if "location" in list(self.images[rand_index].keys()) and "photographer" in list(self.images[rand_index].keys()):
-                        self.metadata_line2.setLabel(self.images[rand_index]["location"])
+                    if "location" in list(self.images[current_image].keys()) and "photographer" in list(self.images[current_image].keys()):
+                        self.metadata_line2.setLabel(self.images[current_image]["location"])
                         self.metadata_line3.setLabel("%s %s" % (kodiutils.get_string(32001),
-                                                                self.utils.remove_unknown_author(self.images[rand_index]["photographer"])))
-                    elif "location" in list(self.images[rand_index].keys()) and "photographer" not in list(self.images[rand_index].keys()):
-                        self.metadata_line2.setLabel(self.images[rand_index]["location"])
+                                                                self.utils.remove_unknown_author(self.images[current_image]["photographer"])))
+                    elif "location" in list(self.images[current_image].keys()) and "photographer" not in list(self.images[current_image].keys()):
+                        self.metadata_line2.setLabel(self.images[current_image]["location"])
                         self.metadata_line3.setLabel("")
-                    elif "location" not in list(self.images[rand_index].keys()) and "photographer" in list(self.images[rand_index].keys()):
+                    elif "location" not in list(self.images[current_image].keys()) and "photographer" in list(self.images[current_image].keys()):
                         self.metadata_line2.setLabel("%s %s" % (kodiutils.get_string(32001),
-                                                                self.utils.remove_unknown_author(self.images[rand_index]["photographer"])))
+                                                                self.utils.remove_unknown_author(self.images[current_image]["photographer"])))
                         self.metadata_line3.setLabel("")
                     else:
                         self.metadata_line2.setLabel("")
                         self.metadata_line3.setLabel("")
                 else:
                     # Logic for user owned photos - custom information
-                    if "line1" in self.images[rand_index]:
-                        self.metadata_line2.setLabel(self.images[rand_index]["line1"])
+                    if "line1" in self.images[current_image]:
+                        self.metadata_line2.setLabel(self.images[current_image]["line1"])
                     else:
                         self.metadata_line2.setLabel("")
-                    if "line2" in self.images[rand_index]:
-                        self.metadata_line3.setLabel(self.images[rand_index]["line2"])
+                    if "line2" in self.images[current_image]:
+                        self.metadata_line3.setLabel(self.images[current_image]["line2"])
                     else:
                         self.metadata_line3.setLabel("")
                 # Insert photo
-                self.backgroud.setImage(self.images[rand_index]["url"])
-                # Pop image and wait
-                del self.images[rand_index]
+                self.backgroud.setImage(self.images[current_image]["url"])
+
+                # Move on to the next image
+                current_image = current_image + 1
+
                 # sleep for the configured time
-                wait_time = kodiutils.get_setting_as_int("wait-time-before-changing-image")
                 self.exit_monitor.waitForAbort(wait_time)
                 if not self._isactive or self.exit_monitor.abortRequested():
                     break
-                # Check if images dict is empty, if so read the file again
-                if not self.images:
-                    self.get_images()
 
     def get_images(self, override=False):
         # Read google images from json file
         self.images = []
+
+        google_images = []
+        my_images = []
         if kodiutils.get_setting_as_int("screensaver-mode") == 0 or kodiutils.get_setting_as_int("screensaver-mode") == 2 or override:
             try:
                 with open(IMAGE_FILE, "r") as f:
@@ -122,14 +136,24 @@ class Kaster(xbmcgui.WindowXMLDialog):
             except:
                 with open(IMAGE_FILE, "r", encoding="utf-8") as f:
                     images = f.read()
-            self.images = json.loads(images)
+            google_images = json.loads(images)
+
         # Check if we have images to append
         if kodiutils.get_setting_as_int("screensaver-mode") == 1 or kodiutils.get_setting_as_int("screensaver-mode") == 2 and not override:
             if kodiutils.get_setting("my-pictures-folder") and xbmcvfs.exists(xbmc.translatePath(kodiutils.get_setting("my-pictures-folder"))):
                 for image in self.utils.get_own_pictures(kodiutils.get_setting("my-pictures-folder")):
-                    self.images.append(image)
-            else:
-                return self.get_images(override=True)
+                    my_images.append(image)
+
+        # If we have more google images than self images, shorten the number of google images, so that we get the same amount of each to show
+        # Otherwise, if we have few personal images and many google images, we end up showing google images all the time and only rarely a
+        # personal image
+        if len(my_images) > 0 and len(my_images) < len(google_images):
+            shuffle(google_images)
+            google_images = google_images[:len(my_images)]
+       
+        self.images = google_images + my_images 
+
+        # Shuffle the images so that they are ready to show
         shuffle(self.images)
         return
 
